@@ -1,11 +1,4 @@
-Perfect.
-**Rabbitz** is a strong choice.
 
-Here is the **final README**, updated and clean, with the project name set to **Rabbitz** and scoped only to **HTML + JavaScript live preview**.
-
----
-
-```md
 # Rabbitz
 
 ## Overview
@@ -115,6 +108,6 @@ Development will continue after semester exams.
 MIT License
 ```
 
----
+
 
 
