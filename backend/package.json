@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "inngest": "npx --ignore-scripts=false inngest-cli@latest dev -u http://localhost:3000/api/inngest"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "cros": "^1.1.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "inngest": "^3.51.0",
+    "mongoose": "^9.1.6",
+    "socket.io": "^4.8.3"
+  }
+}
