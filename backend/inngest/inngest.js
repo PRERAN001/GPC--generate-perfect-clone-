@@ -22,13 +22,15 @@ const gererate=inngest.createFunction({id:"generate"},{
     },
     body: JSON.stringify({
     model: 'arcee-ai/trinity-large-preview:free',
-    input: "return response in this format only:
-        {
-        "html": "",
-        "css": "",
-        "js": ""
-        }"+ 
-        `${event.data.prompt}`,
+    input: `Return response in this format only:
+{
+  "html": "",
+  "css": "",
+  "js": ""
+}
+
+${event.data.prompt}`,
+
     max_output_tokens: 9000,
   }),
 
