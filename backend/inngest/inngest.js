@@ -17,11 +17,18 @@ const gererate=inngest.createFunction({id:"generate"},{
   const options = {
     method: "POST",
     headers: { 
-        "Authorization": `Bearer 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,
+        "Authorization": `Bearer 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`,
         'Content-Type': 'application/json', 
     },
     body: JSON.stringify({
     model: 'arcee-ai/trinity-large-preview:free',
+    input: `Return response in JSON:
+        {
+        "html": "",
+        "css": "",
+        "js": ""
+        } 
+        ${event.data.prompt}`,
     input: `Return response in this format only:
 {
   "html": "",
@@ -30,7 +37,6 @@ const gererate=inngest.createFunction({id:"generate"},{
 }
 
 ${event.data.prompt}`,
-
     max_output_tokens: 9000,
   }),
 
