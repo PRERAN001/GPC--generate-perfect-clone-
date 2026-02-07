@@ -17,7 +17,7 @@ const gererate=inngest.createFunction({id:"generate"},{
   const options = {
     method: "POST",
     headers: { 
-        "Authorization": `Bearer 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`,
+        "Authorization": `Bearer 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,
         'Content-Type': 'application/json', 
     },
     body: JSON.stringify({
