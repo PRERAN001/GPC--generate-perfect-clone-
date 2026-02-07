@@ -5,7 +5,7 @@ const {createServer }=require("http")
 const {Server}=require("socket.io")
 
 const mongoose=require("mongoose")
-mongoose.connect("mongodb://localhost:27017/rabbitz").then(()=>{
+mongoose.connect(process.env.mongodburl).then(()=>{
     console.log("connet to db")
 })
 const rabbitzrouter=require("./routes/rabbitz.router")
