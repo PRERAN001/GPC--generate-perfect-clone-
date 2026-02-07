@@ -17,7 +17,7 @@ const app=express()
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors:{
-        origin: "https://rabbitz-nu.vercel.app/",
+        origin: "https://rabbitz-nu.vercel.app",
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true
     }
