@@ -17,7 +17,7 @@ const gererate=inngest.createFunction({id:"generate"},{
   const options = {
     method: "POST",
     headers: { 
-        "Authorization": `Bearer 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`,
+        "Authorization": `Bearer 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`,
         'Content-Type': 'application/json', 
     },
     body: JSON.stringify({
@@ -36,6 +36,13 @@ const gererate=inngest.createFunction({id:"generate"},{
 
   try {
     const response = await fetch(url, options);
+    console.log("responseeeeeeeeeeeee",response)
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: response.statusText }));
+      throw new Error(`API Error: ${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`);
+    }
+    
     const data = await response.json();      
     console.log(data.output[0].content[0].text);
     const html=build(JSON.parse(data.output[0].content[0].text.replace(/```json/g, "")
@@ -54,12 +61,11 @@ const gererate=inngest.createFunction({id:"generate"},{
       },
     { upsert: true, new: true })
 
-      // Emit socket event to notify frontend that build is ready
       try {
         const { getIo } = require('../socket')
         const io = getIo()
         if (io) {
-          // emit to a room named after the user so only that user's clients receive it
+          
           io.to(event.data.name).emit('build_done', { name: event.data.name, html })
         }
       } catch (e) {
