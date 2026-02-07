@@ -34,7 +34,7 @@ app.use(express.json())
 app.use("/api/inngest",serve({client:inngest,functions}))
 const cors=require("cors")
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://rabbitz-nu.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
