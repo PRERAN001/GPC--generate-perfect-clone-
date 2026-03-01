@@ -17,7 +17,7 @@ const gererate=inngest.createFunction({id:"generate"},{
   const options = {
     method: "POST",
     headers: { 
-        "Authorization": `Bearer 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`,
+        "Authorization": `Bearer {process.env.openrouterapikey}`,
         'Content-Type': 'application/json', 
     },
     body: JSON.stringify({
