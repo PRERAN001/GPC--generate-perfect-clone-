@@ -13,31 +13,29 @@ const gererate=inngest.createFunction({id:"generate"},{
     event:"build/build"
 },async({event,step})=>{   
   const url =
-    "https://openrouter.ai/api/v1/responses";
+    "https://openrouter.ai/api/v1/chat/completions";
   const options = {
     method: "POST",
     headers: { 
-        "Authorization": `Bearer {process.env.openrouterapikey}`,
+        "Authorization": `Bearer ${process.env.openrouterapikey}`,
         'Content-Type': 'application/json', 
     },
     body: JSON.stringify({
     model: 'arcee-ai/trinity-large-preview:free',
-    input: `Return response in JSON:
-        {
-        "html": "",
-        "css": "",
-        "js": ""
-        } 
-        ${event.data.prompt}`,
-    input: `Return response in this format only:
+    messages: [
+      {
+        role: "user",
+        content: `Return response in this format only:
 {
   "html": "",
   "css": "",
   "js": ""
 }
 
-${event.data.prompt}`,
-    max_output_tokens: 9000,
+${event.data.prompt}`
+      }
+    ],
+    max_tokens: 9000,
   }),
 
   };
@@ -52,8 +50,8 @@ ${event.data.prompt}`,
     }
     
     const data = await response.json();      
-    console.log(data.output[0].content[0].text);
-    const html=build(JSON.parse(data.output[0].content[0].text.replace(/```json/g, "")
+    console.log(data.choices[0].message.content);
+    const html=build(JSON.parse(data.choices[0].message.content.replace(/```json/g, "")
   .replace(/```/g, "")
   .trim()))
   
