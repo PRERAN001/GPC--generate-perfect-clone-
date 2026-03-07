@@ -1,6 +1,6 @@
 
 import {initializeApp} from "firebase/app"
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJ67x9u0g-d9l32TxbhNUdgthRlqS8HCQ",
@@ -24,5 +24,14 @@ export async function loginwithGoogle(){
     catch (error) {
     console.error(error);
   }
+}
+
+export async function signOutFromGoogle(){
+    try{
+        await signOut(auth)
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
 

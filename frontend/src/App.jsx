@@ -1,5 +1,5 @@
 import "./App.css";
-import { loginwithGoogle } from "./auth";
+import { loginwithGoogle, signOutFromGoogle } from "./auth";
 import { useContext, useEffect, useState, useRef } from "react";
 import { Rabbitzcontext } from "./context/Rabbitzcontext";
 import { io } from "socket.io-client";
@@ -104,6 +104,11 @@ function App() {
     setuser({ name: name, prompt: prompt, result: "" });
   };
 
+  const handleSignout = async () => {
+    await signOutFromGoogle();
+    setuser({ name: "", prompt: "", result: "" });
+  };
+
   return (
     <div className="min-h-screen bg-black text-white font-mono selection:bg-orange-500 selection:text-black flex flex-col overflow-hidden">
       {/* Abstract Background Decoration */}
@@ -119,19 +124,30 @@ function App() {
             Rabbitz<span className="text-orange-500">.</span>io
           </span>
         </div>
-        <button
-          onClick={handlelogin}
-          className={`
-            px-3 py-2 md:px-5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all border
-            ${
-              user && user.name
-                ? "bg-zinc-900 border-zinc-800 text-blue-400"
-                : "bg-blue-600 border-blue-600 text-white hover:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
-            }
-          `}
-        >
-          {user && user.name ? `[ ${user.name} ]` : "Authorize"}
-        </button>
+        <div className="flex items-center gap-2">
+          {user && user.name ? (
+            <>
+              <span
+                className="px-3 py-2 md:px-5 text-[10px] md:text-xs font-bold uppercase tracking-wider border bg-zinc-900 border-zinc-800 text-blue-400"
+              >
+                [ {user.name} ]
+              </span>
+              <button
+                onClick={handleSignout}
+                className="px-3 py-2 md:px-5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all border bg-zinc-900 border-zinc-800 text-red-400 hover:bg-red-900/20 hover:border-red-600"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handlelogin}
+              className="px-3 py-2 md:px-5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all border bg-blue-600 border-blue-600 text-white hover:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+            >
+              Authorize
+            </button>
+          )}
+        </div>
       </header>
 
       {/* Main Layout Area */}
